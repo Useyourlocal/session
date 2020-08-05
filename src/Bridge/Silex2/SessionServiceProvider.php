@@ -103,8 +103,13 @@ class SessionServiceProvider implements ServiceProviderInterface, EventListenerP
 
     protected function registerOptions(Container $app)
     {
-        $app['session.options'] = [];
-        $app['session.options.import_from_ini'] = true;
+	    if (!isset($app['session.options'])) {
+		    $app['session.options'] = [];
+	    }
+
+	    if (!isset($app['session.options.import_from_ini'])) {
+		    $app['session.options.import_from_ini'] = true;
+	    }
 
         $app['session.options_bag'] = function () use ($app) {
             /*
